@@ -21,7 +21,9 @@ export function initBrowser (UA) {
     'Chrome': browser === 'Chrome', // is Chrome
     'Safari': browser === 'Safari', // is Safari
     'WebKit': baseBrowser === 'WebKit', // is WebKit based browser
-    'Chromium': baseBrowser === 'Chromium' // is Chromium based browser
+    'Chromium': baseBrowser === 'Chromium', // is Chromium based browser
+    // app detect
+    'isWechat': isWechat(ua)
   }
 
   Object.assign(UA, result)
@@ -87,4 +89,13 @@ function browserVersionDetect (ua, browser) {
  */
 function baseBrowserDetect (browser) {
   return BASE_BROWSERS[browser] || ''
+}
+
+/**
+ * is in weChat app
+ * @param  {String}  ua userAgent
+ * @return {Boolean}
+ */
+function isWechat (ua) {
+  return /MicroMessenger/.test(ua)
 }
