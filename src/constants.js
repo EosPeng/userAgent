@@ -1,4 +1,4 @@
-export const _GLOBAL = window || {}
+export const _GLOBAL = typeof window === 'undefined' ? {} : window
 
 export const BASE_BROWSERS = {
   'Chrome': 'Chromium',
