@@ -1,5 +1,7 @@
 # userAgent
 
+[![npm](https://img.shields.io/npm/v/@eos/user-agent.svg)](https://www.npmjs.com/package/@eos/user-agent)
+
 userAgent string parser
 
 ## How To Use
