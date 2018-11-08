@@ -1,18 +1,37 @@
 {
-  "name": "userAgent",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "name": "@eos/user-agent",
+  "version": "0.1.0",
+  "description": "userAgent string parser",
+  "keywords": [
+    "user-agent",
+    "ua-parser"
+  ],
+  "main": "dist/userAgent.common.js",
+  "module": "dist/userAgent.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rollup -w -c build/index.js"
+    "dev": "cross-env VERSION=web-dev rollup -w -c build/index.js",
+    "dev:cjs": "cross-env VERSION=web-cjs rollup -w -c build/index.js",
+    "dev:esm": "cross-env VERSION=web-esm rollup -w -c build/index.js",
+    "build": "node build/build.js"
   },
   "author": "eos peng",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
-    "rollup": "^0.54.1",
-    "rollup-plugin-babel": "^3.0.4"
-  }
+    "cross-env": "^5.2.0",
+    "rollup": "^0.67.0",
+    "rollup-plugin-babel": "^3.0.7",
+    "uglify-js": "^3.4.9"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EosPeng/userAgent.git"
+  },
+  "homepage": "https://github.com/EosPeng/userAgent"
 }

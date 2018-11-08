@@ -18,26 +18,50 @@ const banner =
 const builds = {
   'web-dev': {
     entry: resolve('src/index.js'),
-    dest: resolve('dist/bundle.js'),
+    dest: resolve('dist/userAgent.js'),
     format: 'umd',
-    env: 'development',
+    banner
+  },
+  'web-prod': {
+    entry: resolve('src/index.js'),
+    dest: resolve('dist/userAgent.min.js'),
+    format: 'umd',
+    banner
+  },
+  'web-cjs': {
+    entry: resolve('src/index.js'),
+    dest: resolve('dist/userAgent.common.js'),
+    format: 'cjs',
+    banner
+  },
+  'web-esm': {
+    entry: resolve('src/index.js'),
+    dest: resolve('dist/userAgent.esm.js'),
+    format: 'es',
     banner
   }
 }
 
-const opts = builds['web-dev']
+function getConfig (name) {
+  const opts = builds[name]
+  return {
+    input: opts.entry,
+    output: {
+      file: opts.dest,
+      format: opts.format,
+      banner: opts.banner,
+      name: opts.moduleName || 'UserAgent'
+    },
+    plugins: [
+      babel({
+        exclude: 'node_modules/**'
+      })
+    ]
+  }
+}
 
-module.exports = {
-  input: opts.entry,
-  output: {
-    file: opts.dest,
-    format: opts.format,
-    banner: opts.banner,
-    name: opts.moduleName || 'UserAgent'
-  },
-  plugins: [
-    babel({
-      exclude: 'node_modules/**'
-    })
-  ]
+if (process.env.VERSION) {
+  module.exports = getConfig(process.env.VERSION)
+} else {
+  exports.getBuilds = () => Object.keys(builds).map(getConfig)
 }
